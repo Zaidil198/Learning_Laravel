@@ -42,7 +42,7 @@ class RolePermissionSeeder extends Seeder
         // 3. Buat user default (password otomatis di-hash oleh cast 'hashed' pada model User).
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.test'],
-            ['name' => 'Administrator', 'password' => 'password']
+            ['name' => 'Administrator', 'password' => 'password'],
         );
         $admin->syncRoles(['admin']);
 

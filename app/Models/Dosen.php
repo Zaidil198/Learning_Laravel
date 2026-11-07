@@ -13,7 +13,7 @@ class Dosen extends Model
     protected $table = 'dosen';
 
     // Sesuaikan kolom lain sesuai tabel dosen Anda
-    protected $fillable = ['nidn', 'nama', 'email', 'foto'];
+    protected $fillable = ['nidn', 'nama', 'bidamh_keahlian', 'email', 'foto'];
 
     protected function fotoUrl(): Attribute
     {
