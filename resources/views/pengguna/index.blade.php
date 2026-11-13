@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    @include('partials.nav')
+
     <h1>Data Pengguna</h1>
 
     @if (session('success'))
@@ -23,16 +25,9 @@
     </ul>
     @endif
 
-    @include('partials.nav')
 
     <p>
         <a href="{{ route('pengguna.create') }}" class="btn">Tambah Pengguna</a>
-        <a href="{{ route('mahasiswa.index') }}" class=" btn">Data Mahasiswa</a>
-        <a href="{{ route('dosen.index') }}" class=" btn">Data Dosen</a>
-        <a href="{{ route('mata-kuliah.index') }}" class=" btn">Mata Kuliah</a>
-        <a href="{{ route('ruangan.index') }}" class=" btn">Ruangan</a>
-        <a href="{{ route('kelas.index') }}" class=" btn">Kelas</a>
-        <a href="{{ route('jadwal-kuliah.index') }}" class=" btn">Jadwal Kuliah</a>
     </p>
 
     <table>

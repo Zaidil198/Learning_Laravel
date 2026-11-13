@@ -20,19 +20,9 @@
 
     <p>
         @role('admin')
-        <a href="{{ route('mahasiswa.create') }}">Tambah Mahasiswa</a>
-        |
+        <a href="{{ route('mahasiswa.create') }}" class="btn">Tambah Mahasiswa</a>
         @else
         @endrole
-        <a href="{{ route('dosen.index') }}">Data Dosen</a>
-        |
-        <a href="{{ route('mata-kuliah.index') }}">Mata Kuliah</a>
-        |
-        <a href="{{ route('ruangan.index') }}">Ruangan</a>
-        |
-        <a href="{{ route('kelas.index') }}">Kelas</a>
-        |
-        <a href="{{ route('jadwal-kuliah.index') }}">Jadwal Kuliah</a>
     </p>
 
     <table>

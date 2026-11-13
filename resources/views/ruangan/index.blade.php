@@ -19,17 +19,7 @@
     @endif
 
     <p>
-        <a href="{{ route('ruangan.create') }}">Tambah Ruangan</a>
-        |
-        <a href="{{ route('dosen.index') }}">Data Dosen</a>
-        |
-        <a href="{{ route('mahasiswa.index') }}">Data Mahasiswa</a>
-        |
-        <a href="{{ route('mata-kuliah.index') }}">Mata Kuliah</a>
-        |
-        <a href="{{ route('kelas.index') }}">Kelas</a>
-        |
-        <a href="{{ route('jadwal-kuliah.index') }}">Jadwal Kuliah</a>
+        <a href="{{ route('ruangan.create') }}" class="btn">Tambah Ruangan</a>
     </p>
 
     <table>
@@ -54,7 +44,7 @@
                 <td>{{ $r->kapasitas }}</td>
                 <td>{{ $r->is_lab ? 'Ya' : 'Tidak' }}</td>
                 <td>
-                    <a href="{{ route('ruangan.edit', $r->id) }}" class="btn">Ubah</a>
+                    <a href=" {{ route('ruangan.edit', $r->id) }}" class="btn">Ubah</a>
 
                     <form action="{{ route('ruangan.destroy', $r->id) }}" method="POST" style="display: inline"
                         onsubmit="return confirm('Yakin ingin menghapus data ruangan ini?')">

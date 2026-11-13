@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrasi - Langkah {{ $step }}</title>
+    <title>Registrasi Mahasiswa Baru - Langkah {{ $step }}</title>
     <style>
     @include('partials.style') body {
         max-width: 900px;
@@ -298,10 +298,10 @@
 
         @php
         $labels = [
-        1 => 'Akun &amp; Kontak',
+        1 => 'Akun & Kontak',
         2 => 'Data Pribadi',
         3 => 'Pendidikan',
-        4 => 'Berkas &amp; Konfirmasi',
+        4 => 'Berkas & Konfirmasi',
         ];
         @endphp
 

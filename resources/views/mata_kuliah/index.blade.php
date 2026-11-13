@@ -19,17 +19,7 @@
     @endif
 
     <p>
-        <a href="{{ route('mata-kuliah.create') }}">Tambah Mata Kuliah</a>
-        |
-        <a href="{{ route('dosen.index') }}">Data Dosen</a>
-        |
-        <a href="{{ route('mahasiswa.index') }}">Data Mahasiswa</a>
-        |
-        <a href="{{ route('ruangan.index') }}">Ruangan</a>
-        |
-        <a href="{{ route('kelas.index') }}">Kelas</a>
-        |
-        <a href="{{ route('jadwal-kuliah.index') }}">Jadwal Kuliah</a>
+        <a href="{{ route('mata-kuliah.create') }}" class="btn">Tambah Mata Kuliah</a>
     </p>
 
     <table>

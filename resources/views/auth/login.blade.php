@@ -83,6 +83,11 @@
         </form>
 
         <p class="hint">
+            Belum punya akun?
+            <a href="{{ route('registrasi.start') }}">Daftar sebagai mahasiswa baru</a>.
+        </p>
+
+        <p class="hint">
             Akun uji coba:<br>
             admin@example.test / password (admin)<br>
             mahasiswa@example.test / password (read-only)
