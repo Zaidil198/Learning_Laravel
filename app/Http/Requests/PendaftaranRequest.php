@@ -21,6 +21,12 @@ class PendaftaranRequest extends FormRequest
             ]);
         }
 
+        if ($this->has('email_confirmation')) {
+            $this->merge([
+                'email_confirmation' => strtolower(trim((string) $this->input('email_confirmation'))),
+            ]);
+        }
+
         if ($this->has('no_hp')) {
             $this->merge([
                 'no_hp' => preg_replace('/[\s-]/', '', (string) $this->input('no_hp')),
@@ -42,7 +48,8 @@ class PendaftaranRequest extends FormRequest
     private function stepOneRules(): array
     {
         return [
-            'email' => ['required', 'email', 'max:100', Rule::unique('users', 'email')],
+            'email' => ['required', 'email', 'max:100', 'confirmed', Rule::unique('users', 'email')],
+            'email_confirmation' => ['required', 'email'],
             'no_hp' => ['required', 'string', 'max:16', 'regex:/^(\+62|62|0)8[1-9][0-9]{6,11}$/'],
             'password' => ['required', 'string', 'confirmed', Password::min(8)->letters()->numbers()],
         ];
@@ -53,6 +60,7 @@ class PendaftaranRequest extends FormRequest
         return [
             'nama_lengkap' => ['required', 'string', 'max:100', "regex:/^[A-Za-z\\s.'-]+$/u"],
             'nik' => ['required', 'digits:16', Rule::unique('pendaftaran_mahasiswa', 'nik')],
+            'nisn' => ['required', 'digits:10', Rule::unique('pendaftaran_mahasiswa', 'nisn')],
             'tempat_lahir' => ['required', 'string', 'max:60'],
             'tanggal_lahir' => ['required', 'date', 'before_or_equal:'.now()->subYears(15)->format('Y-m-d')],
             'jenis_kelamin' => ['required', Rule::in(array_keys(config('pendaftaran.jenis_kelamin')))],
@@ -61,6 +69,8 @@ class PendaftaranRequest extends FormRequest
             'negara_asal' => ['nullable', 'required_if:kewarganegaraan,WNA', 'string', 'max:60'],
             'alamat' => ['required', 'string', 'min:10', 'max:255'],
             'kode_pos' => ['required', 'digits:5'],
+            'domisili_berbeda' => ['nullable', 'boolean'],
+            'alamat_domisili' => ['nullable', 'required_if:domisili_berbeda,1', 'string', 'min:10', 'max:255'],
         ];
     }
 
@@ -97,7 +107,9 @@ class PendaftaranRequest extends FormRequest
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'email.max' => 'Email maksimal 100 karakter.',
+            'email.confirmed' => 'Konfirmasi email tidak sama.',
             'email.unique' => 'Email sudah terdaftar. Gunakan email lain.',
+            'email_confirmation.required' => 'Konfirmasi email wajib diisi.',
             'no_hp.required' => 'Nomor HP wajib diisi.',
             'no_hp.max' => 'Nomor HP maksimal 16 karakter.',
             'no_hp.regex' => 'Nomor HP harus berformat Indonesia, contoh 081234567890.',
@@ -112,6 +124,9 @@ class PendaftaranRequest extends FormRequest
             'nik.required' => 'NIK wajib diisi.',
             'nik.digits' => 'NIK harus terdiri dari tepat 16 digit angka.',
             'nik.unique' => 'NIK sudah terdaftar.',
+            'nisn.required' => 'NISN wajib diisi.',
+            'nisn.digits' => 'NISN harus terdiri dari tepat 10 digit angka.',
+            'nisn.unique' => 'NISN sudah terdaftar.',
             'tempat_lahir.required' => 'Tempat lahir wajib diisi.',
             'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
             'tanggal_lahir.date' => 'Tanggal lahir tidak valid.',
@@ -128,6 +143,9 @@ class PendaftaranRequest extends FormRequest
             'alamat.max' => 'Alamat maksimal 255 karakter.',
             'kode_pos.required' => 'Kode pos wajib diisi.',
             'kode_pos.digits' => 'Kode pos harus 5 digit angka.',
+            'alamat_domisili.required_if' => 'Alamat domisili wajib diisi jika domisili berbeda.',
+            'alamat_domisili.min' => 'Alamat domisili minimal 10 karakter.',
+            'alamat_domisili.max' => 'Alamat domisili maksimal 255 karakter.',
             'asal_sekolah.required' => 'Asal sekolah wajib diisi.',
             'jurusan_sekolah.required' => 'Jurusan sekolah wajib dipilih.',
             'jurusan_sekolah.in' => 'Pilihan jurusan sekolah tidak valid.',
@@ -174,12 +192,14 @@ class PendaftaranRequest extends FormRequest
             'no_hp' => 'nomor HP',
             'nama_lengkap' => 'nama lengkap',
             'nik' => 'NIK',
+            'nisn' => 'NISN',
             'tempat_lahir' => 'tempat lahir',
             'tanggal_lahir' => 'tanggal lahir',
             'jenis_kelamin' => 'jenis kelamin',
             'kewarganegaraan' => 'kewarganegaraan',
             'negara_asal' => 'negara asal',
             'kode_pos' => 'kode pos',
+            'alamat_domisili' => 'alamat domisili',
             'asal_sekolah' => 'asal sekolah',
             'jurusan_sekolah' => 'jurusan sekolah',
             'tahun_lulus' => 'tahun lulus',

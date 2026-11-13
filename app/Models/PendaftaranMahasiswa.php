@@ -39,6 +39,9 @@ class PendaftaranMahasiswa extends Model
         'berkas',
         'setuju_syarat',
         'status',
+        'nisn',
+        'domisili_berbeda',
+        'alamat_domisili',
     ];
 
     protected function casts(): array

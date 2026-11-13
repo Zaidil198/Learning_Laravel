@@ -19,10 +19,7 @@
     @endif
 
     <p>
-        @role('admin')
         <a href="{{ route('mahasiswa.create') }}" class="btn">Tambah Mahasiswa</a>
-        @else
-        @endrole
     </p>
 
     <table>

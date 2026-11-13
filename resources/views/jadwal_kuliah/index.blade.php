@@ -21,7 +21,10 @@
     @endif
 
     <p>
+        @role('admin')
         <a href="{{ route('jadwal-kuliah.create') }}" class="btn">Tambah Jadwal</a>
+        @else
+        @endrole
     </p>
 
     <table>

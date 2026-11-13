@@ -13,25 +13,17 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+    
 
-    /*
-    |----------------------------------------------------------------------
-    | Registrasi mahasiswa baru: 4 langkah, data sementara di session.
-    |----------------------------------------------------------------------
-    */
     Route::get('/registrasi', [PendaftaranController::class, 'start'])->name('registrasi.start');
-    Route::get('/registrasi/step/{step}', [PendaftaranController::class, 'show'])
-        ->whereNumber('step')
-        ->name('registrasi.step');
-    Route::post('/registrasi/step/{step}', [PendaftaranController::class, 'store'])
-        ->whereNumber('step')
-        ->name('registrasi.store');
+    Route::get('/registrasi/step/{step}', [PendaftaranController::class, 'show'])->whereNumber('step')->name('registrasi.step');
+    Route::post('/registrasi/step/{step}', [PendaftaranController::class, 'store'])->whereNumber('step')->name('registrasi.store');
     Route::get('/registrasi/sukses', [PendaftaranController::class, 'success'])->name('registrasi.sukses');
 });
 
